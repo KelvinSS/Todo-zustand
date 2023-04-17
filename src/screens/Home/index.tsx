@@ -2,14 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, FlatList, } from 'react-native';
 import { useCallback } from 'react';
 
-import { useIbgeStore } from '../../store/useIbgeStore';
 import { useIbge } from '../../hooks/useIbge';
 
 import { newsSchema } from '../../validators/newsSchema';
 
 import { Ibge } from '../../ibge';
 
-
+import { SafeAreaView } from 'react-native';
 
 export function Home() {
   const { data } = useIbge();
@@ -20,37 +19,38 @@ export function Home() {
         {newsSchema.safeParse(item).success && (
           <Ibge
             key={item.id}
-            item = {item}
+            item={item}
           />)}
       </>
     );
   }, []);
 
   return (
-    <View style={styles.container}>      
-      <StatusBar style="auto" />
+    <SafeAreaView style={styles.container}>
+      <View>
+        <Text style={{fontSize: 30, padding: 20}}>
+          TODO
+        </Text>
+      </View>
       <FlatList
-          data={data}
-          keyExtractor={(_, index) => String(index)}
-          
-          renderItem={renderItem}
+        data={data}
+        keyExtractor={(_, index) => String(index)}
 
-          ListEmptyComponent={() => (
-            <View >
-              <View>
-                
-              </View>
-              <Text >
-                Você ainda não tem tarefas cadastradas
-              </Text>
-              <Text >
-                Crie tarefas  organize seus itens a fazer
-              </Text>
+        renderItem={renderItem}
 
-            </View>
-          )}
-        />
-    </View>
+        ListEmptyComponent={() => (
+          <View >
+            <Text >
+              Você ainda não tem tarefas cadastradas
+            </Text>
+            <Text >
+              Crie tarefas  organize seus itens a fazer
+            </Text>
+          </View>
+        )}
+      />
+
+    </SafeAreaView>
   );
 }
 
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
+    
+    
   },
 });

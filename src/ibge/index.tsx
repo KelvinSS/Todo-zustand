@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import CheckBox from 'expo-checkbox';
 
 import { useIbgeStore } from '../store/useIbgeStore'
@@ -19,17 +19,35 @@ export function Ibge({ item }: Props) {
 
 
     return (
-        <View >
-            <CheckBox
+        <View style={styles.row}>
+            <CheckBox style={styles.check}
                 value={verifyCheck()}
                 onValueChange={() => verifyCheck() ? removeChecked(item.id) : handleChecked(item.id)}
                 color={verifyCheck() ? '#5E60CE' : undefined}
             />
-            <Text >
+            <Text style={styles.title}>
                 {item.titulo}
             </Text>
         </View >
     )
 }
+
+const styles = StyleSheet.create({
+    row: {
+        flex: 1,
+        alignItems: 'center',
+        flexDirection: "row",
+        marginRight: 55,
+    },
+    title: {
+        flexWrap: 'wrap',
+    },
+
+    check: {
+        marginRight: 10,
+        alignItems: 'center',
+        alignSelf: 'center',
+    },
+});
 
 

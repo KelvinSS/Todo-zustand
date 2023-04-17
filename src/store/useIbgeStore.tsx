@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { MMKVStorage } from "../config/mmkv";
 
 interface Item {
     id: number
@@ -56,7 +56,7 @@ export const useIbgeStore = create(
         }),
         {
             name: 'cached-news',
-            storage: createJSONStorage(() => AsyncStorage)
+            storage: createJSONStorage(() => MMKVStorage)
         }
     ))
 
